@@ -3,3 +3,4 @@ uvicorn
 cryptography
 argon2-cffi
 requests
+python-multipart

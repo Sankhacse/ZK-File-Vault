@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.env
+
+vault_storage/
+server/vault_storage/
+
+*.log
+
+users.json

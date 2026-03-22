@@ -5,4 +5,4 @@ p = 23
 g = 5
 q = 11
 
-SERVER_URL = "http://127.0.0.1:8000"
+SERVER_URL = "https://zk-file-vault-1.onrender.com"
