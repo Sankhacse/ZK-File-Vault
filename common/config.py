@@ -5,4 +5,4 @@ p = 23
 g = 5
 q = 11
 
-SERVER_URL = "https://zk-file-vault-1.onrender.com"
+SERVER_URL = "https://zk-file-vault-2.onrender.com"
