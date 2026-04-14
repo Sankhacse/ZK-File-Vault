@@ -1,10 +1,8 @@
-
 # 🔐 ZK File Vault
 
 ### Zero-Knowledge Secure File Storage using Schnorr Protocol
 
 ---
-
 
 ## 🧠 Overview
 
@@ -19,54 +17,72 @@ This project implements a **secure file vault system** where:
 
 ---
 
-## 🔑 Core Idea
+## 🔑 Core idea
 
 Traditional systems:
-❌ Send password / hash to server
-❌ Server can be attacked
+
+* Send password / hash to server
+* Server can be attacked
 
 This project:
-✅ Proves knowledge of password without revealing it
-✅ Uses **Schnorr Identification Protocol**
+
+* Proves knowledge of password without revealing it
+* Uses the **Schnorr Identification Protocol**
 
 ---
 
-## 🔐 Authentication Flow (ZKP)
+## 🔐 Authentication flow (ZKP)
 
-## CLIENT                          SERVER
+**Client → Server interaction**
 
-REGISTER
-→ Generate secret `s`
-→ Compute `v = g^s mod p`
-→ Send `(username, v)`
+### Register
 
-LOGIN
+* Generate secret `s`
+* Compute `v = g^s mod p`
+* Send `(username, v)` to server
 
-1. Client generates:
-   `x = g^r mod p`
+### Login
+
+1. Client computes:
+
+   ```
+   x = g^r mod p
+   ```
+
    → sends to server
 
 2. Server sends challenge:
-   `c`
+
+   ```
+   c
+   ```
 
 3. Client responds:
-   `y = r + c*s mod q`
+
+   ```
+   y = r + c*s mod q
+   ```
 
 4. Server verifies:
-   `g^y == x * v^c mod p`
+
+   ```
+   g^y == x * v^c mod p
+   ```
 
 👉 Password is **never transmitted**
 
 ---
 
-## 🔐 File Security
+## 🔐 File security
 
 * Encryption: **AES-256-GCM**
-* Key Derivation: **Argon2**
+* Key derivation: **Argon2**
 
-### Flow:
+### Flow
 
-Password → Key → Encrypt File → Upload
+```
+Password → Key → Encrypt file → Upload
+```
 
 👉 Server stores only:
 
@@ -75,24 +91,24 @@ Password → Key → Encrypt File → Upload
 
 ---
 
-## 📁 Project Structure
+## 📁 Project structure
 
 ```
 ZK-File-Vault/
 │
 ├── client/
-│   ├── client.py        # CLI client
-│   ├── schnorr.py       # ZKP logic
-│   ├── crypto.py        # encryption
+│   ├── client.py
+│   ├── schnorr.py
+│   ├── crypto.py
 │
 ├── server/
-│   ├── server.py        # FastAPI backend
-│   ├── auth.py          # authentication logic
-│   ├── storage.py       # file storage
+│   ├── server.py
+│   ├── auth.py
+│   ├── storage.py
 │
 ├── common/
-│   ├── config.py        # shared config
-│   ├── utils.py         # helpers
+│   ├── config.py
+│   ├── utils.py
 │
 ├── requirements.txt
 └── README.md
@@ -100,9 +116,9 @@ ZK-File-Vault/
 
 ---
 
-# 🚀 HOW TO RUN (LOCAL SETUP)
+## 🚀 How to run (local setup)
 
-## 🔹 Step 1: Install dependencies
+### Step 1: Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -110,13 +126,13 @@ pip install -r requirements.txt
 
 ---
 
-## 🔹 Step 2: Start the server
+### Step 2: Start the server
 
 ```bash
 uvicorn server.server:app --reload
 ```
 
-👉 Server runs at:
+Server runs at:
 
 ```
 http://127.0.0.1:8000
@@ -124,9 +140,7 @@ http://127.0.0.1:8000
 
 ---
 
-## 🔹 Step 3: Open API docs
-
-Open in browser:
+### Step 3: Open API docs
 
 ```
 http://127.0.0.1:8000/docs
@@ -134,7 +148,7 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 🔹 Step 4: Register a user
+### Step 4: Register a user
 
 Use `/register` endpoint:
 
@@ -145,9 +159,7 @@ password: your_password
 
 ---
 
-## 🔹 Step 5: Run the client
-
-Open a new terminal:
+### Step 5: Run the client
 
 ```bash
 python -m client.client
@@ -155,9 +167,7 @@ python -m client.client
 
 ---
 
-## 🔹 Step 6: Login
-
-Enter:
+### Step 6: Login
 
 ```
 Username: your_name
@@ -166,7 +176,7 @@ Password: your_password
 
 ---
 
-## 🔹 Step 7: Upload file
+### Step 7: Upload file
 
 ```
 Enter file path: test.txt
@@ -179,7 +189,7 @@ Enter file path: test.txt
 
 ---
 
-## 🔹 Step 8: Verify upload
+### Step 8: Verify upload
 
 Go to `/docs` → `/files`
 
@@ -187,7 +197,7 @@ Go to `/docs` → `/files`
 username: your_name
 ```
 
-👉 Output:
+Output:
 
 ```
 ["test.txt"]
@@ -195,21 +205,22 @@ username: your_name
 
 ---
 
-# 🌐 RUN ON RENDER (CLOUD)
+## 🌐 Running on render (cloud)
 
-## 🔹 Deploy backend
+### Deploy backend
 
 * Push code to GitHub
-* Connect repo to Render
-* Use:
+* Connect repository to Render
 
-Build:
+Use:
+
+Build command:
 
 ```
 pip install -r requirements.txt
 ```
 
-Start:
+Start command:
 
 ```
 uvicorn server.server:app --host 0.0.0.0 --port 10000
@@ -217,13 +228,13 @@ uvicorn server.server:app --host 0.0.0.0 --port 10000
 
 ---
 
-## 🔹 Access server
+### Access server
 
 ```
 https://your-app.onrender.com
 ```
 
-Docs:
+API docs:
 
 ```
 https://your-app.onrender.com/docs
@@ -231,7 +242,7 @@ https://your-app.onrender.com/docs
 
 ---
 
-## 🔹 Connect client
+### Connect client
 
 Edit:
 
@@ -245,7 +256,7 @@ SERVER_URL = "https://your-app.onrender.com"
 
 ---
 
-## 🔹 Run client again
+### Run client
 
 ```bash
 python -m client.client
@@ -253,50 +264,50 @@ python -m client.client
 
 ---
 
-# 📡 API ENDPOINTS
+## 📡 API endpoints
 
-## 🔐 Authentication
+### Authentication
 
-* POST `/register`
-* POST `/login/start`
-* POST `/login/verify`
-
----
-
-## 📂 File Operations
-
-* POST `/upload`
-* GET `/files`
-* GET `/download`
+* `POST /register`
+* `POST /login/start`
+* `POST /login/verify`
 
 ---
 
-## 🧪 Utility
+### File operations
 
-* GET `/` → server status
-* GET `/docs` → API UI
+* `POST /upload`
+* `GET /files`
+* `GET /download`
 
 ---
 
-# 🛡️ SECURITY FEATURES
+### Utility
 
-* Zero-Knowledge Authentication
+* `GET /` → server status
+* `GET /docs` → API interface
+
+---
+
+## 🛡️ Security features
+
+* Zero-knowledge authentication
 * No password storage
 * Client-side encryption
-* AES-256-GCM
+* AES-256-GCM encryption
 * Argon2 key derivation
 
 ---
 
-# ⚠️ LIMITATIONS
+## ⚠️ Limitations
 
-* Render free tier → temporary storage
+* Render free tier uses temporary storage
 * No database (JSON-based storage)
-* Small cryptographic parameters (demo purpose)
+* Demo-level cryptographic parameters
 
 ---
 
-# 🎯 DEMO FLOW (FOR PRESENTATION)
+## 🎯 Demo flow
 
 1. Open `.com` → show server running
 2. Open `/docs`
@@ -304,24 +315,26 @@ python -m client.client
 4. Run client → login
 5. Upload file
 6. Show `/files`
-7. Explain encryption + ZKP
+7. Explain encryption and ZKP
 
 ---
 
-# 💡 KEY HIGHLIGHT
+## 💡 Key highlight
 
-👉 Even if server is hacked:
+Even if the server is compromised:
 
-* Password is safe
-* File content is safe
+* Password remains safe
+* File content remains encrypted
 
 ---
 
-# 🔥 FINAL NOTE
+## 🔥 Final note
 
 This project demonstrates a strong combination of:
 
 * Cryptography
 * Backend development
 * Secure system design
+
+---
 
