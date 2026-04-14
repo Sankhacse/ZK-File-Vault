@@ -139,8 +139,8 @@ http://127.0.0.1:8000/docs
 Use `/register` endpoint:
 
 ```
-username: sankha
-password: xyz
+username: your_name
+password: your_password
 ```
 
 ---
@@ -160,8 +160,8 @@ python -m client.client
 Enter:
 
 ```
-Username: sankha
-Password: xyz
+Username: your_name
+Password: your_password
 ```
 
 ---
@@ -184,7 +184,7 @@ Enter file path: test.txt
 Go to `/docs` → `/files`
 
 ```
-username: sankha
+username: your_name
 ```
 
 👉 Output:
