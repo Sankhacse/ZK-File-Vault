@@ -1,6 +1,3 @@
-# 📄 ✅ FINAL README.md (COPY BELOW)
-
-<div align="center">
 
 # 🔐 ZK File Vault
 
@@ -8,7 +5,6 @@
 
 ---
 
-</div>
 
 ## 🧠 Overview
 
