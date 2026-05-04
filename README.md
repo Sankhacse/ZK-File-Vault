@@ -6,6 +6,12 @@
 ---
 </div>
 
+## 📄 Project Report
+
+For a detailed explanation of the system design, cryptographic protocols, and implementation, refer to the full project report:
+
+👉 [Project Report](https://drive.google.com/file/d/1zcy4y3rf5eOzdo9w_8O6kV2Ni-CuM6GE/view?usp=sharing)
+
 ## How It Works
 
 ### The Core Idea
